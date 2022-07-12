@@ -2,14 +2,15 @@ import { loadDependencies } from "./dependencies/index";
 import createApp from "./expressApp";
 import routers from './routers'
 
-import  http from 'http'
+import http from 'http'
 
 import 'dotenv/config'
+import { DependenciesContainer } from './dependencies/models/classes';
 
 const port = process.env.PORT ?? 3000
 
 loadDependencies()
-    .then(dependencies => {
+    .then((dependencies: DependenciesContainer) => {
         const app = createApp(routers, dependencies)
         const server: http.Server = http.createServer(app)
         server.listen(port, () => {
