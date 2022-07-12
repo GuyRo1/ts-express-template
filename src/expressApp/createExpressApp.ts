@@ -9,20 +9,21 @@ import { DependenciesContainer } from './../dependencies/models/classes';
 
 
 
-export const createApp =
-    (routers: RouterContainer[],
-        dependencies: DependenciesContainer): Express => {
-        const app = express();
-        app.use(cors());
-        app.use(express.json())
-        app.use(currentRequestUrl)
-        mountDependencies(app, dependencies.getAll())
-        const log: string[] = mountRouters(app, routers)
-        if (log.length !== 0) throw { log }
-        app.use(healthCheck)
-        app.use(errorHandler)
-        return app
-    }
+export const createApp = (
+    routers: RouterContainer[],
+    dependencies: DependenciesContainer
+): Express => {
+    const app = express();
+    app.use(cors());
+    app.use(express.json())
+    app.use(currentRequestUrl)
+    mountDependencies(app, dependencies.getAll())
+    const log: string[] = mountRouters(app, routers)
+    if (log.length !== 0) throw { log }
+    app.use(healthCheck)
+    app.use(errorHandler)
+    return app
+}
 
 const mountRouters = (app: Express, routers: RouterContainer[]): string[] => {
     const log: string[] = []

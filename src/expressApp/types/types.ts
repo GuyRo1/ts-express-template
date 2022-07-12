@@ -6,9 +6,11 @@ export type RouterContainer = {
     dependencies: string[];
 }
 
+export type DependencyType ='factory' | 'constructor' | 'service';
+
 export type DependencyContainer = {
     name: string;
-    type: 'factory' | 'constructor' | 'service';
+    type: DependencyType;
     dependency: any
 }
 
